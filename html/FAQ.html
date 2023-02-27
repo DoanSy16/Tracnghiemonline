@@ -1,0 +1,148 @@
+<style>
+    .collapsible input:checked+label {
+        background: linear-gradient(-45deg, #ee7752, #FF66FF, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+    }
+    
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    
+    .wrapper {
+        display: flex;
+        padding-top: 0px;
+        justify-content: center;
+    }
+    
+    .collapsible {
+        max-width: 450px;
+        overflow: hidden;
+        font-weight: 500;
+    }
+    
+    .collapsible input {
+        display: none;
+    }
+    
+    .collapsible label {
+        position: relative;
+        font-weight: 600;
+        background: #ffff;
+        box-shadow: 0 5px 0 rgba(0, 0, 0, .1), 0 4px 11px rgba(0, 0, 0, .08);
+        display: block;
+        margin-bottom: 10px;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 4px;
+        z-index: 1;
+    }
+    
+    .collapsible label:after {
+        content: "";
+        position: absolute;
+        right: 15px;
+        top: 20px;
+        width: 18px;
+        height: 18px;
+        background: url(arrow.svg) no-repeat(0 0);
+        transition: all 0.3s ease;
+    }
+    
+    .collapsible input:checked+label:after {
+        transform: rotate(90deg);
+    }
+    
+    .collapsible-text {
+        margin-bottom: 10px;
+        max-height: 1px;
+        overflow: hidden;
+        border-radius: 4px;
+        line-height: 1.4;
+        position: relative;
+        top: -100%;
+        opacity: 0.5;
+        transition: all 0.5s ease;
+    }
+    
+    .collapsible input:checked~.collapsible-text {
+        max-height: 300px;
+        padding-bottom: 25px;
+        background: #ffff;
+        box-shadow: 0 5px 0 rgba(0, 0, 0, .1), 0 4px 11px rgba(0, 0, 0, .08);
+        opacity: 1;
+        top: 0;
+    }
+    
+    .collapsible-text p {
+        padding-left: 15px;
+        padding-right: 15px;
+        font-weight: normal;
+        font-size: 15px;
+    }
+    
+    section {
+        padding: 10px;
+    }
+</style>
+<section style="margin-top: 30px;">
+    <div class="rgba-white-strong rounded shadow p-3">
+        <h3 class="font-weight-bold black-text mb-4 pb-2 text-center">CÂU HỎI THƯỜNG GẶP</h3>
+        <hr class="w-header">
+        <p class="lead text-muted mx-auto mt-4 pt-2 mb-5 text-center">Đây là những câu hỏi thường gặp. Nếu bạn có câu hỏi khác hãy liên hệ TT hỗ trợ</p>
+
+        <div class="row">
+            <div class="col-md-12 col-lg-10 mx-auto mb-5">
+                <div class="wrapper">
+                    <div class="collapsible" style="min-width: 100% !important;">
+                        <input type="checkbox" id="collapsible-head">
+                        <label for="collapsible-head" style="margin-right: 0px;"><h5 class="black-text font-weight-normal mb-0">
+                                Học trực tuyến là gì? <i class="fas fa-angle-down rotate-icon" style="float: right;" ></i>
+                            </h5></label>
+                        <div class="collapsible-text" style="padding-bottom: 5px; padding-top: 15px;">
+                            <p>Có rất nhiều cách hiểu khác nhau về định nghĩa đào tạo online, nhưng cách hiểu cơ bản đó là một phương thức phân phối các tài liệu, nội dung học tập dựa trên các công cụ điện tử hiện đại như: điện thoại, máy tính thông qua
+                                mạng internet. Trong đó, nội dung tài liệu học tập có thể được cập nhật từ các website trường học trực tuyến và các ứng dụng di động khác. Đặc điểm vượt trội của đào tạo qua mạng đó chính là tính tương tác cao và đa dạng
+                                giữa giảng viên và người học. Theo tính năng đó, giảng viên và người học có thể trao đổi trực tiếp với nhau thông qua các ứng dụng: chat, email, diễn đàn, hội thảo trực tuyến,…
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="collapsible" style="min-width: 100% !important;">
+                        <input type="checkbox" id="collapsible-head1">
+                        <label for="collapsible-head1" style="margin-right: 0px;"><h5 class="black-text font-weight-normal mb-0">
+                                Học trực tuyến: Nên hay không? <i class="fas fa-angle-down rotate-icon" style="float: right;" ></i>
+                            </h5></label>
+                        <div class="collapsible-text" style="padding-bottom: 5px; padding-top: 15px;">
+                            <p> Thực tế đã nói lên một điều rằng, cho dù công nghê thông tin phát triển, các trang thiết kế web học trực tuyến trở nên phổ biến thì các trường Đại học cũng không thể bị xóa bỏ. Xã hội vẫn cần các phương thức giáo dục truyền
+                                thống để giúp các bạn trẻ trưởng thành hơn. Tuy nhiên, xã hội cũng luôn cần các tổ chức thiết kế web dạy trực tuyến hay thiết kế phần mềm dạy học online với những khám phá và nội dung truyền đạt hiệu quả hơn. Các phương
+                                tiện trực tuyến như: mạng xã hội, các ứng dụng online ngày càng phát triển chính vì thế, học qua mạng cũng đang là một hiệu quả của thế giới thông tin điện tử toàn cầu. Những trang web học online ra đời giúp cho học viên
+                                có thêm sự tìm kiếm thông tin, tài liệu hữu ích.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="collapsible" style="min-width: 100% !important;">
+                        <input type="checkbox" id="collapsible-head2">
+                        <label for="collapsible-head2" style="margin-right: 0px;"><h5 class="black-text font-weight-normal mb-0">
+                                Quiz là gì? <i class="fas fa-angle-down rotate-icon" style="float: right;" ></i>
+                            </h5></label>
+                        <div class="collapsible-text" style="padding-bottom: 5px; padding-top: 15px;">
+                            <p>Bài Quiz là một dạng bài trắc nghiệm đánh giá, bạn có thể áp dụng để tạo những bài trắc nghiệm tính cách, bài kiểm tra tự đánh giá bản thân hay bài ôn tập cho học viên. Sau khi làm xong các câu hỏi sẽ nhận được ngay lời nhận
+                                xét theo từng thang điểm mà người làm đánh giá đạt được.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

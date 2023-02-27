@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+    <title>Document</title>
+  </head>
+
+  <body>
+    User name: <input type="text" name="" id="user" /> <br />
+    password: <input type="text" name="" id="pass" />
+    <button onclick="login()">Check</button>
+    <p id="result"></p>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyAMh_HSfl1-0PSZEKfTZL8xNRBV-kp27eY",
+        authDomain: "students-517b9.firebaseapp.com",
+        databaseURL: "https://students-517b9-default-rtdb.firebaseio.com",
+        projectId: "students-517b9",
+        storageBucket: "students-517b9.appspot.com",
+        messagingSenderId: "944451943394",
+        appId: "1:944451943394:web:c54088227a5e935d2e57bb",
+        measurementId: "G-Z7CVDJBGDB",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+
+      //=========================================
+      function writeData() {
+        firebase.database().ref("Student/sydh").set({
+          username: "dangth",
+          password: "123",
+          fullname: "Trần Hữu Đang",
+          email: "dangthpc04349@fpt.edu.vn",
+          gender: "true",
+          birthday: "2003-12-10",
+          schoolfee: "2000000",
+          marks: "0",
+        });
+        alert("Success");
+        // firebase.database().ref("user/teonv").set({
+        //     "username": "teonv",
+        //     "password": "iloveyou",
+        //     "fullname": "Nguyễn Văn Tèo",
+        //     "email": "teonv@fpt.edu.vn",
+        //     "gender": "true",
+        //     "birthday": "1995-12-21",
+        //     "schoolfee": "1500000",
+        //     "marks": "0"
+        // });
+      }
+
+      function readData(path) {
+        var dbRef = firebase.database().ref().child(path);
+        dbRef.on(
+          "value",
+          (snapshot) => {
+            console.log(snapshot.val());
+            return snapshot.val();
+          },
+          (errorObject) => {
+            //console.log('The read failed: ' + errorObject.name);
+            return "none";
+          }
+        );
+      }
+
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+
+      // Initialize Firebase
+
+      //var dbUp = firebase.database.ref('push').push();
+
+      // const db = getDatabase();
+      // const ref = db.ref('server/saving-data/fireblog/posts');
+
+      // // Attach an asynchronous callback to read the data at our posts reference
+      // ref.on('value', (snapshot) => {
+      //     console.log(snapshot.val());
+      // }, (errorObject) => {
+      //     console.log('The read failed: ' + errorObject.name);
+      // });
+    </script>
+
+    <script>
+      function login() {
+        let email = document.getElementById("user").value;
+        let pass = document.getElementById("pass").value;
+        var dbRef = firebase.database().ref().child("Students");
+        dbRef.on(
+          "value",
+          (snapshot) => {
+            // var test=[];
+            //  var  test=snapshot.val();
+            //   alert(test);
+            console.log(snapshot.val());
+            // console.log(snapshot.numChildren());
+            snapshot.forEach(function (childSnapshot) {
+              console.log(snapshot.numChildren());
+              var key = childSnapshot.key;
+              console.log(key);
+              console.log(snapshot.child(key).val());
+            });
+            // if(snapshot.val() == null){
+            //   alert("Error");
+            // } else {
+            //   let passwordCheck = snapshot.val().password;
+            //   if(passwordCheck == pass){
+            //     alert("Succes");
+            //   } else {
+            //     alert("Error Password");
+            //   }
+            // }
+          },
+          (errorObject) => {
+            console.log("The read failed: " + errorObject.name);
+          }
+        );
+      }
+    </script>
+  </body>
+</html>

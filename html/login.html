@@ -1,0 +1,66 @@
+<style>
+    .view {
+        border-radius: 20px;
+        background: linear-gradient(-45deg, #ee7752, #FF66FF, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        margin: 2rem;
+        animation: gradient 15s ease infinite;
+        height: auto;
+    }
+    
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    
+    label {
+        padding-bottom: 0px !important;
+        margin-top: -5px !important;
+        margin-left: -10px !important;
+    }
+    
+    section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<section style="margin-top: 100px;">
+    <div class="col-lg-4 m-auto">
+        <div class="card card-cascade narrower">
+            <div class="view view-cascade text-center">
+                <h2 class="card-header-title">Đăng nhập</h2>
+                <p>Vui lòng nhập tài khoản mật khẩu</p>
+            </div>
+
+            <div class="card-body card-body-cascade px-5 py-6">
+
+                <form name="formLogin" id="formLogin">
+                    <div class="md-form md-outline">
+                        <input name="txtusername" type="text" id="username" class="form-control" ng-model="userName" required>
+                        <label class="bg-white green-text rounded px-2 ml-5" for="username"> <strong>Tài khoản</strong> </label>
+                        <small ng-show="formLogin.txtusername.$invalid" class="form-text text-danger">Nhập tên tài khoản</small>
+                    </div>
+
+                    <div class="md-form md-outline">
+                        <input name="txtpassword" type="password" id="password" class="form-control" ng-model="passWord" required>
+                        <label class="bg-white green-text rounded px-2 ml-5" for="password"> <strong>Mật khẩu</strong> </label>
+                        <small ng-show="formLogin.txtpassword.$invalid" class="form-text text-danger">Nhập mật khẩu</small>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button  ng-click="login()" style="border-radius: 10px; padding: 5px;background-color: #23d5ab;color: white; border: none;">Đăng nhập</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>

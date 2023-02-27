@@ -1,0 +1,1 @@
+const user = localStorage.getItem("user") || "none";

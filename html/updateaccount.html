@@ -1,0 +1,98 @@
+<style>
+  .view {
+    border-radius: 20px;
+    background: linear-gradient(-45deg, #ee7752, #ff66ff, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    margin: 2rem;
+    animation: gradient 15s ease infinite;
+    height: auto;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  section {
+    padding: 100px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+<section>
+  <div class="col-lg-5 m-auto">
+    <div class="card card-cascade narrower">
+      <div class="view view-cascade gradient-card-header">
+        <h2 class="card-header-title">Cập nhật tài khoản</h2>
+        <p>Tài khoản: {{Student.username}}</p>
+      </div>
+      <div class="card-body card-body-cascade p-5">
+        <form name="frmUpdate" ng-init="gender = Student.gender">
+          <div class="md-form md-outline">
+            <span class="form-text light-blue-text"> Họ tên</span>
+            <input placeholder=" " name="fullname" type="text" ng-model="Student.fullname" id="fullname"
+              class="form-control border-primary" required />
+            <small ng-show="frmUpdate.fullname.$error.required" id="fullname" class="form-text text-danger">Vui lòng
+              nhập họ tên</small>
+          </div>
+
+          <div class="md-form md-outline">
+            <span class="form-text light-blue-text"> Email</span>
+            <input placeholder=" " name="email" type="email" ng-model="Student.email" id="email"
+              class="form-control border-primary" readonly />
+          </div>
+          <label class="bg-white light-blue-text rounded px-2" for="">Giới tính:</label>
+          <div class="form-check form-check-inline">
+            <input type="radio" ng-model="Student.gender" class="form-check-input" id="gender" name="gender"
+              value="true" ng-checked="gender == true" />
+            <label class="form-check-label light-blue-text" for="gender">Nam</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" ng-model="Student.gender" class="form-check-input" id="gender2" name="gender"
+              value="false" ng-checked="gender == false" />
+            <label class="form-check-label light-blue-text" for="gender2">Nữ</label>
+          </div>
+
+          <div class="md-form md-outline mt-0">
+            <span class="form-text light-blue-text"> Ngày sinh</span>
+            <input placeholder="yyyy-mm-dd" name="birthday" ng-model="Student.birthday" type="text" id="birthday"
+              pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control border-primary" required />
+            <small ng-show="frmUpdate.birthday.$error.required" class="form-text text-danger">Vui lòng nhập ngày
+              sinh</small>
+            <small ng-show="frmUpdate.birthday.$error.pattern" class="form-text text-danger">Không đúng định dạng ngày
+              sinh</small>
+          </div>
+          <div class="md-form md-outline">
+            <span class="form-text light-blue-text"> Học phí</span>
+            <input placeholder=" " ng-model="Student.schoolfee" name="schoolfee" type="text" id="schoolfee"
+              class="form-control border-primary" school-fee required />
+            <small ng-show="frmUpdate.schoolfee.$error.required" id="schoolfee" class="form-text text-danger">Vui lòng
+              nhập học phí</small>
+            <small ng-show="frmUpdate.schoolfee.$invalid && !frmUpdate.schoolfee.$error.required" id="schoolfee"
+              class="form-text text-danger">Học phí phải hơn 2 triệu</small>
+          </div>
+          <div class="md-form md-outline">
+            <span class="form-text light-blue-text"> Điểm</span>
+            <input placeholder=" " ng-model="Student.marks" name="mark" type="text" class="form-control border-primary"
+              readonly />
+          </div>
+          <div class="text-center mt-4">
+            <button ng-click="update()" ng-disabled="frmUpdate.$invalid" class="btn aqua-gradient btn-rounded">
+              Thay đổi
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

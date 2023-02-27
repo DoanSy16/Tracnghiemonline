@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Trắc nghiệm Online</title>
+    <link rel="icon" href="images/logomenu.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- icon -->
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/mdb.min.css">
+    <script src="js/angular.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+    <!-- Gọi trình cắm SWAL (SWeet ALert ) -->
+    <script src="js/sweetalert2.min.js"></script>
+    <!-- Gọi trình cắm SWAL (SWeet ALert ) -->
+    <script src="js/angular-route.js"></script>
+    <!-- Animetion hiệu ứng chuyển động các slide -->
+    <script src="js/angular-animate.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+    <style>
+        body {
+            background: linear-gradient(-45deg, #008800, #0000BB);
+        }
+
+        .main-container {
+            border-radius: 20px;
+            background: linear-gradient(-45deg, #ee7752, #FF66FF, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            margin: 2rem;
+            animation: gradient 15s ease infinite;
+            height: auto;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .fab {
+            padding-top: 10px;
+        }
+
+        .facebook:hover {
+            background-color: #23a6d5;
+            border-radius: 45px;
+        }
+
+        .twitter:hover {
+            background-color: white;
+            border-radius: 45px;
+        }
+
+        .google:hover {
+            background-color: white;
+            border-radius: 45px;
+        }
+
+        .linkedin:hover {
+            background-color: blueviolet;
+            border-radius: 45px;
+        }
+
+        .instagram:hover {
+            background-color: red;
+            border-radius: 45px;
+        }
+
+        a:focus {
+            text-decoration: none;
+        }
+
+        .button-collapse:hover {
+            border-radius: 9px;
+            background-color: #3399FF;
+        }
+
+        .iconmenu {
+            height: 10px;
+            width: 10px;
+            margin-left: 5px;
+            padding: 5px;
+        }
+
+        .iconmenu:hover {
+            background-color: #23a6d5;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body class="fixed-sn white-skin" ng-app="myApp">
+    <header ng-show="timer==0">
+        <div id="mySidenav" class="sidenav">
+            <li> <a href="#!index" class="" ng-click="changeSearch(0)" style="height: auto;"><img style="width:80%;"
+                        src="images/logomenu.png"></a></li>
+            <li> <a href="#!index" ng-click="changeSearch(0)"><i class="w-fa fas fa-home"></i>Trang chủ</a></li>
+            <li><a href="#!about" ng-click="changeSearch(1)"><i class="w-fa fas fa-credit-card"></i>Giới thiệu</a></li>
+            <li><a href="#!contact" ng-click="changeSearch(1)"><i class="w-fa fas fa-phone-square-alt"></i></i>Liên
+                    hệ</a></li>
+            <li> <a href="#!feedback" ng-click="changeSearch(1)"><i class="w-fa fas fa-comments"></i></i>Góp ý</a></li>
+            <li><a href="#!FAQ" ng-click="changeSearch(1)"><i class="w-fa fas fa-question-circle"></i></i>Hỏi đáp</a>
+            </li>
+            <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="w-fa fas fa-list"></i>Danh mục</a>
+                <ul class="dropdown-menu" style="background-color: #111;color:  #818181;">
+                    <li ng-repeat="sj in Subjects">
+                        <a ng-click="checkLogin(sj.Id)" class="danhmuc">
+                            <img src="{{'images/logos/'+sj.Logo}}" class="img-fluid rounded-circle hoverable"
+                                style="height: 20px;" alt=""> {{sj.Name}}
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+        </div>
+        <nav class="navbar fixed-top navbar-expand-lg  double-nav">
+            <div class="float-left">
+                <span class="iconmenu" style="font-size:20px;cursor:pointer" ng-click="checkMenu()">{{(checkMN %2 == 0)?'&#9776;':' &times;'}}</span>
+            </div>
+            <div class="breadcrumb-dn mr-auto">
+                <p><strong class="font-weight-bold">MENU</strong></p>
+            </div>
+            <div class="name breadcrumb-dn mr-auto">
+                <h1 contenteditable="false">TRẮC NGHIỆM ONLINE</h1>
+            </div>
+            <div class="container breadcrumb-dn {{( hide==0)?'':'hidden'}}">
+                <input class="inputsearch" type="text" placeholder="Search..." ng-change="search()" ng-model="change">
+                <div class="search"></div>
+            </div>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle waves-effect" href="" id="userDropdown" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user" ng-show="{{Student==null}}"></i> <span
+                        class="clearfix d-none d-sm-inline-block">{{(Student==null)?'Tài khoản':Student.fullname}}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="userDropdown">
+                    <div ng-show="Student==null && checkUsername==null">
+                        <a class="dropdown-item" href="#!register">Đăng kí</a>
+                        <a class="dropdown-item" href="#!login">Đăng nhập</a>
+                        <a class="dropdown-item" href="" ng-click="forgotPassWord()">Quên mật khẩu</a>
+                    </div>
+                    <div ng-hide="Student==null && checkUsername==null" {{(Student==null)? '' : style=" width: 140px !important;" }}>
+                        <a class="dropdown-item" href="#!updateaccount">Thông tin cá nhân</a>
+                        <a class="dropdown-item" href="#!changepassword">Đổi mật khẩu</a>
+                        <a class="dropdown-item" href="" ng-click="logout()">Đăng xuất</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main" style="min-height: 500px;padding: 16px;">
+        <div ng-show="loading" class="loading">
+            <h1> LOADING</h1>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="slide-container">
+            <div ng-view class="slide-animation"></div>
+        </div>
+    </main>
+
+    <footer  ng-show="timer==0" class="page-footer m-auto"style="background-color:black">
+        <div class="col-md-1 " style="margin-left: 50px;">
+            <a href=""><img class="mb-2" src="images/logo2.png" alt="" height="30"></a>
+            <small class="d-block mb-2" style="color: red;">© 2023</small>
+        </div>
+        <div class="row col-12" style="margin-top: 50px;flex-wrap: nowrap !important;">
+            <div class="col-lg-3 col-md">
+                <div class="footer-title">Khoá học online</div>
+                <ul class="list-unstyled text-small">
+                    <li><a href="">Lập trình JAVA</a></li>
+                    <li><a href="">Lập trình HTML</a></li>
+                    <li><a href="">Microsoft SQL Sever</a></li>
+                    <li><a href="">Lập trình Java Swing</a></li>
+                    <li><a href="">Spring boost- MVC</a></li>
+
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md">
+                <div class="footer-title">Hỗ trợ</div>
+                <ul class="list-unstyled text-small">
+                    <li><a href="">Hướng dẫn sử dụng</a></li>
+                    <li><a href="">Hướng dẫn mua hàng</a></li>
+                    <li><a href="">Chăm sóc khách hàng</a></li>
+                    <li><a href="">Phản hồi khiếu nại</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md">
+                <div class="footer-title">ONLINE DEVELOPER</div>
+                <ul class="list-unstyled text-small">
+                    <li><a href="">Về chúng tôi</a></li>
+                    <li><a href="">Liên hệ</a></li>
+                    <li><a href="">Điều khoản bảo mật</a></li>
+                    <li><a href="">Điều khoản sử dụng</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md">
+                <a class="facebook p-2 m-2 fa-lg fb-ic ml-0 " href="https://www.facebook.com/" style="padding: 0px;">
+                    <i class="fab fa-facebook-f white-text mr-lg-1"
+                        style="padding-left: 2px; width: 11px; height: 11px;"> </i>
+                </a>
+                <a class=" twitter p-2 m-2 fa-lg tw-ic">
+                    <i class="fab fa-twitter mr-lg-1" style="padding-left: 2px; width: 11px; height: 11px;"> </i>
+                </a>
+                <a class="google p-2 m-2 fa-lg gplus-ic">
+                    <i class="fab fa-google-plus-g  mr-lg-1" style="padding-left: 2px; width: 11px; height: 11px;"> </i>
+                </a>
+                <a class="linkedin p-2 m-2 fa-lg li-ic">
+                    <i class="fab fa-linkedin-in white-text mr-lg-1"
+                        style="padding-left: 2px; width: 11px; height: 11px;"> </i>
+                </a>
+                <a class="instagram p-2 m-2 fa-lg ins-ic">
+                    <i class="fab fa-instagram white-text mr-lg-1"
+                        style="padding-left: 0px; width: 15px; height: 13px;"> </i>
+                </a>
+            </div>
+        </div>
+        <div class="footer-copyright text-center">
+            @ 2021 - Cao đẳng FPT Polytechnic
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="APP/myApp.js"></script>
+    <script src="APP/indexCtrl.js"></script>
+    <script src="APP/viewtestCtrl.js"></script>
+    <script src="APP/testCtrl.js"></script>
+    <script src="APP/loginCtrl.js"></script>
+    <script src="APP/registerCtrl.js"></script>
+    <script src="APP/updateaccountCtrl.js"></script>
+    <script src="APP/changepasswordCtrl.js"></script>
+    <script src="APP/feedbackCtrl.js"></script>
+    <script src="APP/reviewCtrl.js"></script>
+    
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+  
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyAMh_HSfl1-0PSZEKfTZL8xNRBV-kp27eY",
+          authDomain: "students-517b9.firebaseapp.com",
+          databaseURL: "https://students-517b9-default-rtdb.firebaseio.com",
+          projectId: "students-517b9",
+          storageBucket: "students-517b9.appspot.com",
+          messagingSenderId: "944451943394",
+          appId: "1:944451943394:web:c54088227a5e935d2e57bb",
+          measurementId: "G-Z7CVDJBGDB",
+        };
+  
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+  
+        //=========================================
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script>
+</body>
+
+</html>

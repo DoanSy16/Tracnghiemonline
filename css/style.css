@@ -1,0 +1,534 @@
+.name h1 {
+    /* title */
+    position: relative;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 10px;
+    color: #000000;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+    line-height: 0.70em;
+    outline: none;
+    animation: animation 5s linear infinite;
+}
+
+@keyframes animation {
+    0%,
+    18%,
+    20%,
+    50.1%,
+    60%,
+    65.5%,
+    80%,
+    90.1%,
+    92% {
+        color: #0e3742;
+        text-shadow: none;
+    }
+    18.1%,
+    20.1%,
+    30%,
+    50%,
+    60.1%,
+    65%,
+    80.1%,
+    90%,
+    92.1%,
+    100% {
+        color: #FF3333;
+        text-shadow: 0 0 10px #17e710, 0 0 20px #03bcf4, 0 0 40px #17e710, 0 0 80px #03bcf4, 0 0 160px #17e710;
+        /* font-weight: bold; */
+    }
+}
+
+.box {
+    place-items: center;
+    padding: 5px;
+    border-radius: 25px;
+    --border-size: 5px;
+    --border-angle: 0turn;
+    width: auto;
+    height: auto;
+    background-image: conic-gradient( from var(--border-angle), #213, #112 50%, #213), conic-gradient(from var(--border-angle), transparent 25%, #08f, #f03);
+    background-size: calc(100% - (var(--border-size) * 2)) calc(100% - (var(--border-size) * 2)), cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    animation: bg-spin 3s linear infinite;
+}
+
+@keyframes bg-spin {
+    to {
+        --border-angle: 1turn;
+    }
+}
+
+.box:hover {
+    animation-play-state: paused;
+}
+
+@property --border-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0turn;
+}
+
+.button a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #FF3333;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
+}
+
+.button a:hover {
+    background: #FF3333;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #FF0033, 0 0 25px #FF0066, 0 0 50px #FF3366, 0 0 100px#FF33FF;
+}
+
+.button a span {
+    position: absolute;
+    display: block;
+}
+
+.button a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #FF0000);
+    animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+    0% {
+        left: -100%;
+    }
+    50%,
+    100% {
+        left: 100%;
+    }
+}
+
+.button a span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #FF0000);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+    0% {
+        top: -100%;
+    }
+    50%,
+    100% {
+        top: 100%;
+    }
+}
+
+.button a span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #FF0000);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: 1s
+}
+
+@keyframes btn-anim3 {
+    0% {
+        right: -100%;
+    }
+    50%,
+    100% {
+        right: 100%;
+    }
+}
+
+.button a span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #FF0000);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+    0% {
+        bottom: -100%;
+    }
+    50%,
+    100% {
+        bottom: 100%;
+    }
+}
+
+.loader {
+    margin-right: 10px;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #240229;
+    overflow: hidden;
+    box-shadow: -5px -5px 5px rgba(255, 255, 255, 0.1), 10px 10px 10px rgba(0, 0, 0, 0.4), inset -5px -5px 5px rgba(255, 255, 255, 0.2), inset 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+.loader img {
+    content: "";
+    position: absolute;
+    width: 90%;
+    top: 7px;
+    left: 8px;
+    /* right: 10px;
+    bottom: 10px; */
+    z-index: 10;
+    background: #240229;
+    border-radius: 50%;
+    border: 2px solid #240229;
+    box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.2), inset 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.loader>span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: 1;
+    background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
+    filter: blur(10px);
+    animation: animate 2s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* search */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    /* left: 0; */
+    right: 0;
+    bottom: 0;
+    width: 400px;
+    height: 100px;
+}
+
+.search {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: #3333FF;
+    border-radius: 50%;
+    transition: all 1s;
+    z-index: 4;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 25px 0 #33CCFF;
+}
+
+.search:hover {
+    cursor: pointer;
+}
+
+.search::before {
+    content: "";
+    position: absolute;
+    margin: auto;
+    top: 16px;
+    right: 0;
+    bottom: 0;
+    left: 14px;
+    width: 12px;
+    height: 2px;
+    background: white;
+    transform: rotate(45deg);
+    transition: all .5s;
+}
+
+.search::after {
+    content: "";
+    position: absolute;
+    margin: auto;
+    top: -8px;
+    right: 0;
+    bottom: 0;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid white;
+    transition: all .5s;
+}
+
+.inputsearch {
+    font-family: 'Inconsolata', monospace;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 30px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background: #33CCFF;
+    color: white;
+    text-shadow: 0 0 10px #33CCFF;
+    padding: 0 50px 0 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 25px 0 #33CCFF, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 25px 0 rgba(0, 0, 0, 0.5);
+    transition: all 1s;
+    opacity: 0;
+    z-index: 5;
+    font-weight: bolder;
+    letter-spacing: 0.1em;
+}
+
+.inputsearch:hover {
+    cursor: pointer;
+}
+
+.inputsearch:focus {
+    width: 400px;
+    opacity: 1;
+    cursor: text;
+}
+
+.inputsearch:focus~.search {
+    right: -360px;
+    background: #151515;
+    z-index: 6;
+}
+
+.inputsearch:focus~.search::before {
+    top: 0;
+    left: 0;
+    width: 25px;
+}
+
+.inputsearch:focus~.search::after {
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    border: none;
+    background: white;
+    border-radius: 0%;
+    transform: rotate(-45deg);
+}
+
+.inputsearch::placeholder {
+    color: white;
+    opacity: 0.5;
+    font-weight: bolder;
+}
+
+.loading {
+    text-align: center;
+    margin-top: 200px;
+}
+
+.loading h1 {
+    font-weight: bold;
+    font-size: 50px;
+    color: white;
+}
+
+.loading span {
+    display: inline-block;
+    vertical-align: middle;
+    width: .6em;
+    height: .6em;
+    margin: .19em;
+    background: #FF99FF;
+    font-size: 50px;
+    border-radius: .6em;
+    animation: loading 1s infinite alternate;
+}
+
+
+
+.loading span:nth-of-type(2) {
+    background: #CC99FF;
+    animation-delay: 0.2s;
+}
+
+.loading span:nth-of-type(3) {
+    background: #9999FF;
+    animation-delay: 0.4s;
+}
+
+.loading span:nth-of-type(4) {
+    background: #6699FF;
+    animation-delay: 0.6s;
+}
+
+.loading span:nth-of-type(5) {
+    background: #3399FF;
+    animation-delay: 0.8s;
+}
+
+.loading span:nth-of-type(6) {
+    background: #0099FF;
+    animation-delay: 1.0s;
+}
+
+.loading span:nth-of-type(7) {
+    background: #FF66FF;
+    animation-delay: 1.2s;
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.sidenav {
+    border-radius: 10px;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 0px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a i {
+    margin-right: 20px;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+    color: rgb(8, 206, 97) !important;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    height: 10px;
+    right: 5px;
+    font-size: 36px;
+    background-color: white !important;
+    margin: 5px !important;
+    padding: 0px !important;
+    /* margin-left: 50px; */
+}
+
+.danhmuc:hover {
+    color: rgb(8, 206, 97) !important;
+    background-color: #111 !important;
+}
+
+#main {
+    transition: margin-left .5s;
+    /* padding: 16px; */
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+.slide-container {
+    position: relative;
+}
+
+
+.slide-animation.ng-enter,
+.slide-animation.ng-leave {
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 600px;
+}
+
+.slide-animation.ng-enter {
+    z-index: 100;
+    top: 600px;
+    opacity: 0;
+}
+
+.slide-animation.ng-enter.ng-enter-active {
+    top: 0;
+    opacity: 1;
+}
+
+.slide-animation.ng-leave {
+    z-index: 101;
+    top: 0;
+    opacity: 1;
+}
+
+.slide-animation.ng-leave.ng-leave-active {
+    top: -600px;
+    opacity: 0;
+}
+.sidenav::-webkit-scrollbar {
+    display: none;
+}

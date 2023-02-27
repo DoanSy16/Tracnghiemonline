@@ -1,0 +1,61 @@
+<style>
+    h5>strong {
+        font-weight: bold;
+        color: #0033FF;
+    }
+
+    .review>h1 {
+        font-size: 30px;
+        font-weight: bold;
+    color: rebeccapurple;
+    }
+</style>
+<section>
+    <div class="px-5  rgba-white-strong rounded shadow">
+        <h1 class="h1-responsive font-weight-bold text-center" style="color: royalblue; padding-top: 20px;margin-top: 20px;">Kết quả kiểm tra</h1>
+        <h2 class="h1-responsive font-weight-bold text-center"></h2>
+        <p class="grey-text text-center w-responsive mx-auto mb-5"></p>
+        <div class="row ">
+            <div class="col-lg-12 ">
+                <div class="col-sm-6 review" style="border-right: 1px solid black;">
+                    <h1 class="text-center">Đáp án</h1>
+                    <hr>
+                    <div ng-repeat=" item in ques">
+                        <h5 class="font-weight-bold dark-grey-text mb-3">
+                            <strong>{{item.id+1+'. '+item.name}}</strong>
+                        </h5>
+                        <form name="formTest"
+                            style="text-align: left;background-position: center;background-repeat: no-repeat;background-size: contain;">
+                            <fieldset class="form-check mb-2" ng-repeat="an in answers[item.id]">
+                                <input type="radio" ng-model="elem[item.id]" class="form-check-input" id="{{an.Id}}"
+                                    name="group" value="{{an.Id}}" ng-checked="elem[item.id] == an.Id" disabled>
+                                <label class="form-check-label" for="{{an.Id}}"
+                                    style="font-weight: bold;{{(elem[item.id] == an.Id)?'color: green':''}}">{{an.Text}}</label>
+                            </fieldset>
+                        </form>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-sm-6 review">
+                    <h1 class="text-center">Câu trả lời của bạn</h1>
+                    <hr>
+                    <div ng-repeat=" item in ques">
+                        <h5 class="font-weight-bold dark-grey-text mb-3">
+                            <strong>{{item.id+1+'. '+item.name}}</strong>
+                        </h5>
+                        <form name="formTest"
+                            style="text-align: left;background-position: center;background-repeat: no-repeat;background-size: contain;">
+                            <fieldset class="form-check mb-2" ng-repeat="an in answers[item.id]">
+                                <input type="radio" ng-model="elem[item.id]" class="form-check-input" id="{{an.Id}}"
+                                    name="group" value="{{an.Id}}" ng-checked="an.Id== kq[item.id]" disabled>
+                                <label class="form-check-label" for="{{an.Id}}"
+                                    style="font-weight: bold;{{(an.Id== kq[item.id])?'color: red':''}} ;{{(an.Id== kq[item.id] && elem[item.id] == an.Id)?'color: green':''}}">{{an.Text}}</label>
+                            </fieldset>
+                        </form>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
